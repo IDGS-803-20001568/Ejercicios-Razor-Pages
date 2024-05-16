@@ -1,0 +1,83 @@
+﻿@page
+@model CglrApp001Ejercicio.Pages.aplicacionIMCModel
+
+@{
+    Layout = "_Layout";
+}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Índice de Masa Corporal</title>
+    <link rel="stylesheet" href="~/css/IMC.css" />
+</head>
+<body>
+    <div class="container">
+        <h3>Calcule Su índice de masa Corporal</h3>
+
+        <form method="post">
+            <p>Introduzca su Peso: <input type="number" asp-for="Peso" step="0.01" min="0"></p>
+            <p>Introduzca su Altura: <input type="number" asp-for="Altura" step="0.01" min="0"></p>
+
+            <p><input type="submit" value="Calcular"></p>
+
+            @if (Model.IMC > 0)
+            {
+                <div class="result">
+                    <strong>Su índice de masa corporal es de = @Model.IMC.ToString("F2")</strong>
+                    <strong>Clasificación: @Model.Clasificacion</strong>
+                </div>
+
+                <div class="recommendations">
+                    <h3>Estas son algunas recomendaciones que te pueden servir:</h3>
+
+                    @{
+                        var clasificacion = Model.Clasificacion;
+                        var imagen = "";
+                        var descripcion = "";
+
+                        switch (clasificacion)
+                        {
+                            case "Peso Bajo":
+                                imagen = Url.Content("~/img/peso_bajo.jpg");
+                                descripcion = "Es importante que consultes con un nutricionista para ganar peso de manera saludable.";
+                                break;
+                            case "Peso Normal":
+                                imagen = Url.Content("~/img/peso_normal.jpg");
+                                descripcion = "¡Sigue manteniendo un estilo de vida saludable!";
+                                break;
+                            case "Sobrepeso":
+                                imagen = Url.Content("~/img/sobrepeso.jpg");
+                                descripcion = "Considera ajustar tu dieta y aumentar la actividad física.";
+                                break;
+                            case "Obesidad grado I":
+                                imagen = Url.Content("~/img/obesidad_grado1.jpg");
+                                descripcion = "Es recomendable buscar orientación médica para manejar tu peso.";
+                                break;
+                            case "Obesidad grado II":
+                                imagen = Url.Content("~/img/obesidad_grado2.jpg");
+                                descripcion = "Es importante trabajar con profesionales de salud para reducir tu peso.";
+                                break;
+                            case "Obesidad grado III":
+                                imagen = Url.Content("~/img/obesidad_grado3.jpg");
+                                descripcion = "Se requiere atención médica urgente para evitar complicaciones graves.";
+                                break;
+                            default:
+                                imagen = Url.Content("~/img/default.jpg");
+                                descripcion = "Consulta con un profesional de salud para obtener recomendaciones personalizadas.";
+                                break;
+                        }
+                    }
+
+                    <div>
+                        <img src="@imagen" alt="@clasificacion" />
+                        <p>@descripcion</p>
+                    </div>
+                </div>
+            }
+        </form>
+    </div>
+</body>
+</html>

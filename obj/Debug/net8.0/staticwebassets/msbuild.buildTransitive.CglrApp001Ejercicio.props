@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\buildMultiTargeting\CglrApp001Ejercicio.props" />
+</Project>

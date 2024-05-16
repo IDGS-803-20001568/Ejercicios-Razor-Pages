@@ -1,0 +1,68 @@
+﻿@page
+@model CglrApp001Ejercicio.Pages.arreglosModel
+@{
+    ViewData["Title"] = "Arreglos";
+    Layout = "_Layout";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arreglos con 20 números aleatorios</title>
+    <link rel="stylesheet" href="~/css/arreglos.css" />
+</head>
+<body>
+    <div class="container">
+        <h3>Arreglos con 20 números aleatorios</h3>
+        @{
+            int[] arrNumeros = new int[20];
+
+            Random random = new Random();
+            for (int i = 0; i < arrNumeros.Length; i++)
+            {
+                arrNumeros[i] = random.Next(101);
+            }
+
+            double suma = 0;
+            double media = 0;
+            double moda = 0;
+            double mediana = 0;
+
+            for (int i = 0; i < arrNumeros.Length; i++)
+            {
+                suma = suma + arrNumeros[i];
+            }
+
+            media = suma / arrNumeros.Length;
+            moda = arrNumeros.GroupBy(x => x).OrderByDescending(g => g.Count()).First().Key;
+
+            if (arrNumeros.Length % 2 == 0)
+            {
+                int medio1 = arrNumeros.Length / 2 - 1;
+                int medio2 = arrNumeros.Length / 2;
+                mediana = (arrNumeros[medio1] + arrNumeros[medio2]) / 2.0;
+            }
+            else
+            {
+                int medio = arrNumeros.Length / 2;
+                mediana = arrNumeros[medio];
+            }
+        }
+        <ul>
+            @foreach (var numero in arrNumeros)
+            {
+                <li>@numero</li>
+            }
+        </ul>
+        <h4>Operaciones:</h4>
+        <ul>
+            <li>Suma: @suma </li>
+            <li>Promedio: @media </li>
+            <li>Moda: @moda </li>
+            <li>Mediana: @mediana </li>
+        </ul>
+    </div>
+</body>
+</html>

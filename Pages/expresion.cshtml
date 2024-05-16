@@ -1,0 +1,97 @@
+﻿@page
+@model CglrApp001Ejercicio.Pages.expresionModel
+@{
+}
+
+<style>
+    .divResultados{
+        display: flex;
+        flex-wrap: wrap;
+        max-width: 100%;
+    }
+
+    .formulario {
+        display: flex;
+        flex-wrap: wrap;
+        max-width: 100%;
+    }
+
+    .formulario p {
+        margin: 10px;
+    }
+
+    .formulario input {
+        flex: 1;
+        max-width: 50%;
+    }
+
+    .contenedorImg{
+        text-align:center;
+    }
+
+    .divBtn{
+        justify-content:center;
+        display:flex;
+    }
+
+    .btnCalcular{
+        width: 350px;
+        height: 50px;
+    }
+
+    .imgExpresion{
+        border-radius: 5%;
+    }
+
+    .imgResp {
+        height: 100px !important;
+    }
+
+    .resultado{
+        width:100%;
+        border: 1px solid #000;
+        padding: 10px;
+        text-align: center;
+    }
+
+</style>
+
+<h3>
+    Evalua los valores del Binomio de newton
+</h3>
+<div class="contenedorImg">
+    <div>
+        <img class="imgExpresion" src="~/img/programa3.png" alt="Expresión" />
+    </div>
+</div>
+<form method="post">
+    <div class="formulario">
+    <p> <strong>a</strong>: <input placeholder="Ingresa un valor" type="number" asp-for="a" /></p>
+    <p><strong>b</strong>: <input placeholder="Ingresa un valor" type="number" asp-for="b" /></p>
+    <p><strong>x</strong>: <input placeholder="Ingresa un valor" type="number" asp-for="x" /></p>
+    <p><strong>y</strong>: <input placeholder="Ingresa un valor" type="number" asp-for="y" /></p>
+    <p><strong>n</strong>: <input placeholder="Ingresa un valor" type="number" asp-for="n" /></p>
+    </div>
+    <div class="divBtn">
+        <p><input class="btnCalcular" type="submit" value="Calcular" /></p>
+    </div>
+
+    @if (Model.CalculoUno != 0 && Model.CalculoDos != 0)
+    { 
+    <div>
+        <h3>
+            Resultado
+        </h3>
+        <div class="divResultados">
+            <div class="resultado">
+                <img class="imgResp" src="~/img/programa3-1.png" alt="Expresión" />
+                <p>Resultado = @Model.CalculoUno</p>
+            </div>
+            <div class="resultado">
+                    <img class="imgResp" src="~/img/programa3-2.png" alt="Expresión" />
+                <p>Resultado =  @Model.CalculoDos</p>
+            </div>
+        </div>
+    </div>
+    }
+</form>

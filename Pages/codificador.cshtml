@@ -1,0 +1,50 @@
+﻿@page
+@model CglrApp001Ejercicio.Pages.codificadorModel
+@{
+    ViewData["Title"] = "Codificador/Decodificador";
+    Layout = "_Layout";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="~/css/codificador.css" />
+</head>
+<body>
+    <div class="container">
+        <h2>Codificador/Decodificador</h2>
+
+        <form method="post">
+            <div>
+                <label for="MensajeEntrada">Mensaje:</label>
+                <input type="text" id="MensajeEntrada" name="MensajeEntrada" value="@Model.MensajeEntrada" required />
+            </div>
+            <div>
+                <label for="Shift">Desplazamiento (n):</label>
+                <input type="number" id="Shift" name="Shift" value="@Model.Shift" min="1" max="25" required />
+            </div>
+            <div>
+                <input type="radio" id="Encode" name="Operacion" value="Codificar" checked />
+                <label for="Encode">Codificar</label>
+
+                <input type="radio" id="Decode" name="Operacion" value="Decodificar" />
+                <label for="Decode">Decodificar</label>
+            </div>
+            <div>
+                <button type="submit">Procesar</button>
+            </div>
+        </form>
+
+        @if (!string.IsNullOrEmpty(Model.MensajeSalida))
+        {
+            <div class="result">
+                <h3>Resultado:</h3>
+                <p>@Model.MensajeSalida</p>
+            </div>
+        }
+    </div>
+</body>
+</html>
